@@ -1,37 +1,29 @@
 import { Page, expect, Locator } from "@playwright/test";
 import { ProductPageLocators } from "../Locators/ProductPageLocators";
 
-export default class ProductPage  {
-    
+export default class ProductPage {
+
 
     constructor(private page: Page) {
-        this.page=page;
-       
+        this.page = page;
     }
 
-    async openMenu() {
-    await this.page.locator(ProductPageLocators.settingsicon).click();
+    // Step 1: Click on setting icon
+    async clickSettingIcon() {
+        await this.page.click('#react-burger-menu-btn');
+    }
+
+    // Step 2: Click on logout
+    async clickLogout() {
+        await this.page.click('#logout_sidebar_link');
+    }
+
+    // Combined logout method
+    async logout() {
+        await this.clickSettingIcon();
+        await this.clickLogout();
+    }
 }
 
-    async logout()
-    {
-       await this.openMenu();
-        await this.page.locator(ProductPageLocators.logoutLink).click();
-    }
-
-    async openAboutPage(){
-        await this.openMenu();
-        await this.page.locator(ProductPageLocators.aboutLink).click();
-    }
-
-
-   /* async verifyProductFieldVisible() {
-         this.productText = await this.page.locator('.title');
-        this.productLogo = this.page.locator('.app_logo');
-        await expect(this.productText).toBeVisible();
-    }
-
-    async verifyLogoVisible() {
-        await expect(this.productLogo).toBeVisible();
-    }*/
-}
+  
+   

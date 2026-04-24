@@ -22,9 +22,11 @@ test.describe('Product Page Validation', () => {
 
 
     test('User should be able to navigate to about page and navigate back', async ({ page }) => {
+        await productpage.openMenu();
         await productpage.openAboutPage();
-        await expect(page.locator(ProductPageLocators.requestdemobtn)).toBeVisible();
-        await expect(page.locator(ProductPageLocators.tryItFreebtn)).toBeVisible();
+         await page.waitForLoadState('load');
+        await expect(page.locator(ProductPageLocators.bookdemobtn)).toBeVisible();
+        await expect(page.locator(ProductPageLocators.tryUpFreeBtn)).toBeVisible();
         await page.waitForLoadState('load');
         await page.goBack();
         await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');

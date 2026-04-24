@@ -3,5 +3,5 @@ export class ProductPageLocators {
     static logoutLink ='#logout_sidebar_link';
     static  aboutLink ='#about_sidebar_link';
     static bookdemobtn ="button:has-text('Book a Demo')";
-    static tryUpFreeBtn ="button:has-text('Try it free')";
+    static tryUpFreeBtn ="button:has-text('Sign up for free')";
 }

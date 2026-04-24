@@ -5,6 +5,7 @@
     "moduleResolution": "NodeNext",
     "types": ["node"],
     "strict": false,
+    "esModuleInterop": true,
     "skipLibCheck": true
   },
   "include": [
