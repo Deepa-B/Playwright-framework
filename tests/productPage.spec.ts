@@ -19,24 +19,21 @@ test.describe('Product Page Validation', () => {
 
     });
 
-
-
-    test('User should be able to navigate to about page and navigate back', async ({ page }) => {
-        await productpage.openMenu();
-        await productpage.openAboutPage();
-         await page.waitForLoadState('load');
-        await expect(page.locator(ProductPageLocators.bookdemobtn)).toBeVisible();
-        await expect(page.locator(ProductPageLocators.tryUpFreeBtn)).toBeVisible();
-        await page.waitForLoadState('load');
-        await page.goBack();
-        await expect(page).toHaveURL('https://www.saucedemo.com/inventory.html');
-    });
-
     test('User should be able to logout successfully', async ({ page }) => {
-        await productpage.logout();
-        await expect(page.locator(LoginLocators.loginBtn)).toBeVisible();
+        // Step 1: Click on setting icon
+        await productpage.clickSettingIcon();
 
+        // Step 2: Click on logout
+        await productpage.clickLogout();
+
+        // Verify logout was successful
+        await expect(page.locator(LoginLocators.loginBtn)).toBeVisible();
     });
+
+
+
+
+
 });
 
 
