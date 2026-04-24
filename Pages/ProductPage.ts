@@ -1,21 +1,37 @@
 import { Page, expect, Locator } from "@playwright/test";
-import { BasePage } from "./BasePage";
+import { ProductPageLocators } from "../Locators/ProductPageLocators";
 
-export class Products extends BasePage {
-    readonly productText: Locator;
-    readonly productLogo: Locator;
+export default class ProductPage  {
+    
 
-    constructor(page: Page) {
-        super(page);
-        this.productText = this.page.locator('.title');
-        this.productLogo = this.page.locator('.app_logo');
+    constructor(private page: Page) {
+        this.page=page;
+       
     }
 
-    async verifyProductFieldVisible() {
+    async openMenu() {
+    await this.page.locator(ProductPageLocators.settingsicon).click();
+}
+
+    async logout()
+    {
+       await this.openMenu();
+        await this.page.locator(ProductPageLocators.logoutLink).click();
+    }
+
+    async openAboutPage(){
+        await this.openMenu();
+        await this.page.locator(ProductPageLocators.aboutLink).click();
+    }
+
+
+   /* async verifyProductFieldVisible() {
+         this.productText = await this.page.locator('.title');
+        this.productLogo = this.page.locator('.app_logo');
         await expect(this.productText).toBeVisible();
     }
 
     async verifyLogoVisible() {
         await expect(this.productLogo).toBeVisible();
-    }
+    }*/
 }
