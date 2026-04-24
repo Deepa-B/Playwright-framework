@@ -19,7 +19,7 @@ test.describe('Product Page Validation', () => {
 
     });
 
-    test('User should be able to logout successfully', async ({ page }) => {
+    test.afterEach('User should be able to logout successfully', async ({ page }) => {
         // Step 1: Click on setting icon
         await productpage.clickSettingIcon();
 
@@ -29,6 +29,11 @@ test.describe('Product Page Validation', () => {
         // Verify logout was successful
         await expect(page.locator(LoginLocators.loginBtn)).toBeVisible();
     });
+
+    test('Add Sauce Labs Bike Light to cart and verify', async ({ page }) => {  
+        await productpage.verifyAddingProductToCart();
+
+        });
 
 
 

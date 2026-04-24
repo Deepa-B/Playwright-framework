@@ -23,6 +23,14 @@ export default class ProductPage {
         await this.clickSettingIcon();
         await this.clickLogout();
     }
+
+    async verifyAddingProductToCart() {
+        await this.page.click(ProductPageLocators.product1);
+        await this.page.locator(ProductPageLocators.addtocartbtn).click();
+        const cartBadge = this.page.locator(ProductPageLocators.cartBadgeIcon);
+  await expect(cartBadge).toBeVisible();
+  await expect(cartBadge).toHaveText('1');
+    }
 }
 
   
