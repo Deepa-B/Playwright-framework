@@ -35,6 +35,13 @@ test.describe('Product Page Validation', () => {
 
         });
 
+    test('Complete checkout flow', async ({ page }) => {
+        // Add product to cart
+        await productpage.verifyAddingProductToCart();
+
+        // Complete full checkout flow
+        await productpage.completeCheckout('John', 'Doe', '12345');
+    });
 
 
 

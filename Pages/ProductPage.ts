@@ -28,8 +28,50 @@ export default class ProductPage {
         await this.page.click(ProductPageLocators.product1);
         await this.page.locator(ProductPageLocators.addtocartbtn).click();
         const cartBadge = this.page.locator(ProductPageLocators.cartBadgeIcon);
-  await expect(cartBadge).toBeVisible();
-  await expect(cartBadge).toHaveText('1');
+        await expect(cartBadge).toBeVisible();
+        await expect(cartBadge).toHaveText('1');
+    }
+
+    // Cart operations
+    async navigateToCart() {
+        await this.page.click(ProductPageLocators.cartLink);
+    }
+
+    async proceedToCheckout() {
+        await this.page.click(ProductPageLocators.checkoutBtn);
+    }
+
+    // Checkout step one - Enter information
+    async enterCheckoutInfo(firstName: string, lastName: string, postalCode: string) {
+        await this.page.fill(ProductPageLocators.firstNameInput, firstName);
+        await this.page.fill(ProductPageLocators.lastNameInput, lastName);
+        await this.page.fill(ProductPageLocators.postalCodeInput, postalCode);
+    }
+
+    async clickContinue() {
+        await this.page.click(ProductPageLocators.continueBtn);
+    }
+
+    // Complete checkout
+    async finishCheckout() {
+        await this.page.click(ProductPageLocators.finishBtn);
+    }
+
+    // Verify order completion
+    async verifyOrderComplete() {
+        const successMsg = this.page.locator(ProductPageLocators.orderCompleteMsg);
+        await expect(successMsg).toBeVisible();
+        await expect(successMsg).toHaveText('Thank you for your order!');
+    }
+
+    // Full checkout flow
+    async completeCheckout(firstName: string, lastName: string, postalCode: string) {
+        await this.navigateToCart();
+        await this.proceedToCheckout();
+        await this.enterCheckoutInfo(firstName, lastName, postalCode);
+        await this.clickContinue();
+        await this.finishCheckout();
+        await this.verifyOrderComplete();
     }
 }
 
