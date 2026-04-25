@@ -43,6 +43,16 @@ test.describe('Product Page Validation', () => {
         await productpage.completeCheckout('John', 'Doe', '12345');
     });
 
+    test('Add multiple items to cart', async ({ page }) => {
+        const products = ['Sauce Labs Bike Light', 'Sauce Labs Backpack'];
+        
+        // Add multiple items to cart
+        await productpage.addMultipleItemsToCart(products);
+
+        // Verify cart badge shows correct count
+        await productpage.verifyCartBadgeCount('2');
+    });
+
 
 
 

@@ -32,6 +32,24 @@ export default class ProductPage {
         await expect(cartBadge).toHaveText('1');
     }
 
+    // Add multiple items to cart
+    async addMultipleItemsToCart(productNames: string[]) {
+        for (const productName of productNames) {
+            const productLocator = `text=${productName}`;
+            await this.page.click(productLocator);
+            await this.page.locator(ProductPageLocators.addtocartbtn).click();
+            // Go back to product list to add next item
+            await this.page.goBack();
+        }
+    }
+
+    // Verify cart badge shows correct count
+    async verifyCartBadgeCount(expectedCount: string) {
+        const cartBadge = this.page.locator(ProductPageLocators.cartBadgeIcon);
+        await expect(cartBadge).toBeVisible();
+        await expect(cartBadge).toHaveText(expectedCount);
+    }
+
     // Cart operations
     async navigateToCart() {
         await this.page.click(ProductPageLocators.cartLink);
